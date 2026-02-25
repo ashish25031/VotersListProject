@@ -1,0 +1,154 @@
+﻿@model VotersListProject.Models.VoterModel
+
+@{
+    ViewData["Title"] = "Register Voter";
+}
+
+<style>
+    body {
+        background-color: #f4f6f9;
+    }
+
+    .register-card {
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        border: none;
+    }
+
+    .register-title {
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .form-control {
+        height: 50px;
+        border-radius: 12px;
+    }
+
+    textarea.form-control {
+        height: auto;
+    }
+
+    .btn-register {
+        height: 50px;
+        border-radius: 12px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+</style>
+
+<div class="container d-flex justify-content-center align-items-center"
+     style="min-height: 100vh;">
+
+    <div class="card register-card p-5"
+         style="width: 600px;">
+
+        <div class="text-center mb-4">
+            <h3 class="register-title">Voter Registration</h3>
+            <p class="text-muted">Create your voter account below</p>
+        </div>
+
+        <form asp-action="AddVoters" method="post">
+
+            <!-- Voter ID -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Voter ID</label>
+                <input asp-for="VoterId"
+                       class="form-control"
+                       placeholder="Enter Voter ID" />
+                <span asp-validation-for="VoterId" class="text-danger"></span>
+            </div>
+
+            <!-- Full Name -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Full Name</label>
+                <input asp-for="VoterName"
+                       class="form-control"
+                       placeholder="Enter Full Name" />
+                <span asp-validation-for="VoterName" class="text-danger"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Email Address</label>
+                <input asp-for="Email"
+                       type="email"
+                       class="form-control"
+                       placeholder="example@gmail.com" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Password</label>
+                <input asp-for="Password"
+                       type="password"
+                       class="form-control"
+                       placeholder="Enter secure password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Date of Birth</label>
+                <input asp-for="DoB"
+                       type="date"
+                       class="form-control" />
+                <span asp-validation-for="DoB" class="text-danger"></span>
+            </div>
+
+            <!-- Address -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Address</label>
+                <textarea asp-for="Address"
+                          class="form-control"
+                          rows="2"
+                          placeholder="Enter full address"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <!-- Aadhaar -->
+            <div class="mb-4">
+                <label class="form-label fw-semibold">Aadhaar Number</label>
+                <input asp-for="Aadhaar"
+                       class="form-control"
+                       placeholder="Enter 12-digit Aadhaar number" />
+                <span asp-validation-for="Aadhaar" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Select Role</label>
+
+                <select asp-for="Role" class="form-select rounded-3">
+                    <option value="">-- Select Role --</option>
+                    <option value="User">User</option>
+                   
+                </select>
+
+                <span asp-validation-for="Role" class="text-danger small"></span>
+            </div>
+
+            <div class="d-grid">
+                <input type="submit"
+                       value="Register Voter"
+                       class="btn btn-success btn-register" />
+            </div>
+
+        </form>
+
+        <div class="text-center mt-4">
+            <span class="text-muted">Already have an account?</span>
+            <a asp-controller="Voters"
+               asp-action="Login"
+               class="fw-semibold text-decoration-none">
+                Login here
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

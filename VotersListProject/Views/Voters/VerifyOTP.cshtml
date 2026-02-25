@@ -1,0 +1,11 @@
+﻿<h2>Email Verification</h2>
+
+<form method="post">
+    <input type="text" name="otp" placeholder="Enter 6-digit OTP" required />
+    <button type="submit">Verify</button>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}

@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Request Profile Update";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <!-- Header -->
+                <div class="card-header bg-primary text-white rounded-top-4">
+                    <h4 class="mb-0">
+                        <i class="bi bi-pencil-square me-2"></i>
+                        Request Profile Change
+                    </h4>
+                </div>
+
+                <!-- Body -->
+                <div class="card-body p-4">
+
+                    @if (ViewBag.Success != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show">
+                            @ViewBag.Success
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    <form asp-action="RequestUpdate" method="post">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">
+                                Select Field to Change
+                            </label>
+                            <select name="RequestedField"
+                                    class="form-select"
+                                    required>
+                                <option value="">-- Choose Field --</option>
+                                <option value="VoterName">Full Name</option>
+                                <option value="Email">Email</option>
+                                <option value="Address">Address</option>
+                                <option value="DoB">Date of Birth</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                Enter New Value
+                            </label>
+                            <input type="text"
+                                   name="NewValue"
+                                   class="form-control"
+                                   placeholder="Enter updated value"
+                                   required />
+                        </div>
+
+                        <input type="submit" value=" Submit Request" class="btn btn-primary w-100 rounded-pill" />
+
+
+                     
+
+                    </form>
+
+                </div>
+
+                <div class="card-footer bg-white text-center rounded-bottom-4">
+                    <a asp-action="SearchUser"
+                       class="btn btn-outline-secondary rounded-pill">
+                        Back to Profile
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

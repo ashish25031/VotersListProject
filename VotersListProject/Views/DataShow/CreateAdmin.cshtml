@@ -1,0 +1,50 @@
+﻿@model VotersListProject.Models.VoterModel
+
+@{
+    ViewData["Title"] = "Create Admin";
+}
+
+<h2>Create New Admin</h2>
+
+<form asp-action="CreateAdmin" method="post">
+
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="VoterName" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label>Password</label>
+        <input asp-for="Password" type="password" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label>Voter ID</label>
+        <input asp-for="VoterId" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label>Aadhaar</label>
+        <input asp-for="Aadhaar" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label>Date of Birth</label>
+        <input asp-for="DoB" type="date" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label>Address</label>
+        <input asp-for="Address" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Create Admin
+    </button>
+
+</form>

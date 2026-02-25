@@ -1,0 +1,54 @@
+﻿@model VotersListProject.Models.VoterModel
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-warning text-dark">
+            <h4>Edit Voter</h4>
+        </div>
+
+        <div class="card-body">
+            <form method="post">
+
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label>Name</label>
+                    <input asp-for="VoterName" class="form-control"/>
+                </div>
+
+                <div class="mb-3">
+                    <label>Email</label>
+                    <input asp-for="Email" class="form-control"/>
+                </div>
+
+                <div class="mb-3">
+                    <label>Voter ID</label>
+                    <input asp-for="VoterId" class="form-control"/>
+                </div>
+
+                <div class="mb-3">
+                    <label>Date of Birth</label>
+                    <input asp-for="DoB" type="date" class="form-control"/>
+                </div>
+
+                <div class="mb-3">
+                    <label>Address</label>
+                    <input asp-for="Address" class="form-control"/>
+                </div>
+
+                <div class="mb-3">
+                    <label>Aadhaar</label>
+                    <input asp-for="Aadhaar" class="form-control"/>
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    Update
+                </button>
+
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Verify OTP";
+}
+
+<div class="container mt-5">
+    <h3>Password Reset Verification</h3>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    <form method="post">
+        <div class="mb-3">
+            <label>Enter OTP</label>
+            <input type="text" name="otp" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label>New Password</label>
+            <input type="password" name="newPassword" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label>Confirm Password</label>
+            <input type="password" name="confirmPassword" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Reset Password
+        </button>
+    </form>
+</div>

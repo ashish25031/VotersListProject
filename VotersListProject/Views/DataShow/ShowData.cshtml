@@ -1,0 +1,194 @@
+﻿@using VotersListProject.Models
+@model IEnumerable<VoterModel>
+
+@{
+    ViewData["Title"] = "Election Management Dashboard";
+}
+
+<div class="container-fluid">
+
+    <!-- 🔴 Top Controls (Logout + Create Admin + Notification) -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <!-- ➕ Create Admin Button -->
+        <a asp-controller="DataShow"
+           asp-action="CreateAdmin"
+           class="btn btn-success rounded-pill px-4">
+            + Create New Admin
+        </a>
+
+        <div>
+            <!-- 🔔 Notification Bell -->
+            <a asp-action="ManageRequests"
+               class="btn btn-dark position-relative me-2">
+
+                <i class="bi bi-bell-fill"></i>
+
+                @if (ViewBag.PendingRequests != null && ViewBag.PendingRequests > 0)
+                {
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        @ViewBag.PendingRequests
+                    </span>
+                }
+
+            </a>
+
+            <!-- 🔴 Logout Button -->
+            <a asp-controller="Voters"
+               asp-action="Logout"
+               class="btn btn-danger rounded-pill px-4">
+                Logout
+            </a>
+        </div>
+
+    </div>
+
+    <!-- PAGE TITLE -->
+    <div class="mb-4">
+        <h2 class="fw-bold text-dark">
+            Election Management Dashboard
+        </h2>
+        <p class="text-muted">
+            Official voter registry and administrative control panel
+        </p>
+    </div>
+
+    <!-- STATISTICS CARDS -->
+    <div class="row g-4 mb-4">
+
+        <div class="col-lg-4">
+            <div class="card text-white bg-primary shadow-sm p-3">
+                <small>Total Registered Voters</small>
+                <h2>@ViewBag.TotalUsers</h2>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card text-white bg-success shadow-sm p-3">
+                <small>Administrative Users</small>
+                <h2>@ViewBag.TotalAdmins</h2>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card text-white bg-dark shadow-sm p-3">
+                <small>Standard Users</small>
+                <h2>@ViewBag.TotalNormalUsers</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SEARCH SECTION -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+
+            <form method="get">
+                <div class="row align-items-center">
+
+                    <div class="col-md-10">
+                        <input type="text"
+                               name="searchString"
+                               value="@Context.Request.Query["searchString"]"
+                               class="form-control form-control-lg"
+                               placeholder="Search by Name, Email, Aadhaar..." />
+                    </div>
+
+                    <div class="col-md-2 d-grid">
+                        <button class="btn btn-primary btn-lg">
+                            Search
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- DATA TABLE -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Voter ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Date of Birth</th>
+                            <th>Address</th>
+                            <th>Aadhaar</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.VoterId</td>
+                                    <td>@item.VoterName</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.DoB.ToString("dd MMM yyyy")</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Aadhaar</td>
+                                    <td class="text-center">
+
+                                        <a asp-action="Edit"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-outline-warning btn-sm me-2">
+                                            Edit
+                                        </a>
+
+                                        <a asp-action="Delete"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-outline-danger btn-sm"
+                                           onclick="return confirm('Are you sure you want to remove this voter?');">
+                                            Delete
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center text-muted py-4">
+                                    No voter records available.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="mt-4 text-center">
+
+        @if (ViewBag.TotalPages != null)
+        {
+            for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <a asp-action="ShowData"
+                   asp-route-page="@i"
+                   class="btn @(i == ViewBag.CurrentPage ? "btn-primary" : "btn-outline-secondary") me-2 px-4">
+                    @i
+                </a>
+            }
+        }
+
+    </div>
+
+</div>
